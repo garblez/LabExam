@@ -15,7 +15,10 @@ public class LabGroup {
 	 * @param line The lab group specification in the above format
 	 */
 	public LabGroup(String line) {
+	    // Take the first character on the line (as a string of length 1) and set it as the lab group label.
 	    label = line.substring(0,1);
+
+	    // Create a time slot from the rest of the line.
 	    slot = new TimeSlot(line.substring(1).trim());
 	}
 

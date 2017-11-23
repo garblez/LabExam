@@ -9,10 +9,8 @@ import java.util.*;
  */
 public class Student {
 
-
     private int number;
     private ArrayList<String> labDays = new ArrayList<>();
-
     private ArrayList<TimeSlot> labSlots = new ArrayList<>();
 	/**
 	 * Creates a new Student object based on the input parameters.
@@ -48,16 +46,13 @@ public class Student {
         List<LabGroup> courseLabs = course.getLabs();
 
 
-        //System.out.println(labDays);
-
 	    for (LabGroup courseLab: courseLabs){
 	        for (TimeSlot time: labSlots){
 
+	            // Add the lab group label if it is on a free day and hasn't already been added.
 	            if (!labDays.contains(courseLab.getDay()) && !eligibleLabs.contains(courseLab.getLabel())){
                     eligibleLabs.add(courseLab.getLabel());
-                }
-
-                else if (time.hasNoOverlap(courseLab.getTimes())){
+                } else if (time.hasNoOverlap(courseLab.getTimes())){
                     eligibleLabs.add(courseLab.getLabel());
                 }
 

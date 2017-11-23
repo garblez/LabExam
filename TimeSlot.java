@@ -17,6 +17,7 @@ public class TimeSlot {
 	 * separated by space characters
 	 */
 	public TimeSlot(String spec) {
+	    // Produce a list of specifications of the time slot [day, start time, end time].
 	    String[] specs = spec.trim().split(" ");
 	    day = specs[0];
 	    start = new Time(specs[1]);
@@ -42,13 +43,36 @@ public class TimeSlot {
 
     // Checks if this time slot starts after the other.
     public boolean isAfter(TimeSlot other){
-        //return !this.getStart().precedes(other.getEnd()) && !this.getEnd().precedesOrEquals(other.getEnd());
         return other.getEnd().precedesOrEquals(this.getStart()) && other.getEnd().precedes(this.getEnd());
     }
 
     public boolean hasNoOverlap(TimeSlot other){
-        if (this.getDay().equals(other.getDay()))
-            return (this.isBefore(other) || this.isAfter(other));
-        return false;
+        return this.getDay().equals(other.getDay()) && (this.isBefore(other) || this.isAfter(other));
+    }
+
+
+    @Override
+    public String toString() {
+        return day + " "+ start + " - " + end;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TimeSlot timeSlot = (TimeSlot) o;
+
+        if (day != null ? !day.equals(timeSlot.day) : timeSlot.day != null) return false;
+        if (start != null ? !start.equals(timeSlot.start) : timeSlot.start != null) return false;
+        return end != null ? end.equals(timeSlot.end) : timeSlot.end == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = day != null ? day.hashCode() : 0;
+        result = 31 * result + (start != null ? start.hashCode() : 0);
+        result = 31 * result + (end != null ? end.hashCode() : 0);
+        return result;
     }
 }

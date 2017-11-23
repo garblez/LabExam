@@ -1,7 +1,6 @@
 package labExam1;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public class Course {
 	    return labs;
     }
 
-    public String getName(){
+    public String getCourseName(){
 	    return name;
     }
 
@@ -46,7 +45,7 @@ public class Course {
         StringBuilder message = new StringBuilder();
         message.append(name+"\n");
         for (LabGroup lab: labs){
-            message.append(lab.getLabel() + " " + lab.getStart() + " - " + lab.getEnd() + "\n");
+            message.append("Group " + lab.getLabel() + " " + lab.getTimes() + "\n");
         }
         return message.toString();
     }
